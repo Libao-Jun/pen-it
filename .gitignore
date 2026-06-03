@@ -26,3 +26,6 @@ Thumbs.db
 
 # 锁文件（npm 包不提交锁文件）
 pnpm-lock.yaml
+
+# 忽略 npmrc
+.npmrc
