@@ -503,3 +503,23 @@ import { isArray, formatFull, deepClone, unique } from 'pen-it'
   ```ts
   const off = onScroll(y => console.log(y))
   ```
+
+---
+
+### 防抖与节流 — `control`
+
+- **`debounce(fn, delay?, options?)`** — 防抖，停止调用 delay 毫秒后才执行。
+
+  ```ts
+  const fn = debounce((val: string) => console.log(val), 500)
+  fn('a'); fn('b'); fn('c')
+  // => 'c'
+  ```
+
+- **`throttle(fn, interval?, options?)`** — 节流，固定间隔内最多执行一次。
+
+  ```ts
+  const fn = throttle((val: string) => console.log(val), 500)
+  fn('a'); fn('b'); fn('c')
+  // => 'a'，500ms 后输出 'c'
+  ```
