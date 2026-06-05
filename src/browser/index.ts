@@ -155,3 +155,38 @@ export const onScroll = (callback: (scrollY: number) => void): () => void => {
   window.addEventListener("scroll", handler);
   return () => window.removeEventListener("scroll", handler);
 };
+
+// 可视区域检测
+
+/**
+ * 监听目标元素是否进入/离开可视区域
+ * @param target - 目标 DOM 元素
+ * @param onEnter - 元素进入可视区域时的回调
+ * @param onLeave - 元素离开可视区域时的回调（可选）
+ * @param options - IntersectionObserver 配置项
+ * @returns 清理函数，调用后停止观察
+ * @example
+ * const cleanup = observeIntersection(
+ *   document.querySelector(".footer")!,
+ *   () => loadMore(10),
+ * );
+ * cleanup(); // 停止观察
+ */
+export const observeIntersection = (
+  target: Element,
+  onEnter: (entry: IntersectionObserverEntry) => void,
+  onLeave?: (entry: IntersectionObserverEntry) => void,
+  options?: IntersectionObserverInit,
+): () => void => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        onEnter(entry);
+      } else if (onLeave) {
+        onLeave(entry);
+      }
+    });
+  }, options);
+  observer.observe(target);
+  return () => observer.disconnect();
+};

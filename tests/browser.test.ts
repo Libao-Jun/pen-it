@@ -9,6 +9,7 @@ import {
   scrollToTop,
   scrollToBottom,
   onScroll,
+  observeIntersection,
 } from '../src/browser'
 
 // ============================================================
@@ -392,5 +393,108 @@ describe('onScroll', () => {
     // rAF ran immediately in our mock
     // The callback should have received some value
     expect(callback).toHaveBeenCalled()
+  })
+})
+
+// ============================================================
+// observeIntersection
+// ============================================================
+describe('observeIntersection', () => {
+  let mockObserve: ReturnType<typeof vi.fn>
+  let mockDisconnect: ReturnType<typeof vi.fn>
+  let observerCallback: IntersectionObserverCallback | null
+
+  beforeEach(() => {
+    mockObserve = vi.fn()
+    mockDisconnect = vi.fn()
+
+    // Mock IntersectionObserver — must use a regular function (not arrow) for `new` to work
+    const MockObserver = vi.fn(function (this: any, cb: IntersectionObserverCallback) {
+      observerCallback = cb
+      this.observe = mockObserve
+      this.disconnect = mockDisconnect
+      this.unobserve = vi.fn()
+      this.takeRecords = vi.fn(() => [])
+      this.root = null
+      this.rootMargin = ''
+      this.thresholds = []
+    })
+    vi.stubGlobal('IntersectionObserver', MockObserver)
+  })
+
+  afterEach(() => {
+    observerCallback = null
+    vi.restoreAllMocks()
+  })
+
+  it('should observe the target element', () => {
+    const target = document.createElement('div')
+    observeIntersection(target, vi.fn())
+    expect(mockObserve).toHaveBeenCalledWith(target)
+  })
+
+  it('should call onEnter when element becomes visible', () => {
+    const target = document.createElement('div')
+    const onEnter = vi.fn()
+
+    observeIntersection(target, onEnter)
+
+    // Simulate intersection
+    observerCallback!(
+      [{ isIntersecting: true } as IntersectionObserverEntry],
+      {} as IntersectionObserver,
+    )
+
+    expect(onEnter).toHaveBeenCalledTimes(1)
+  })
+
+  it('should call onLeave when element leaves viewport', () => {
+    const target = document.createElement('div')
+    const onEnter = vi.fn()
+    const onLeave = vi.fn()
+
+    observeIntersection(target, onEnter, onLeave)
+
+    // Simulate leaving
+    observerCallback!(
+      [{ isIntersecting: false } as IntersectionObserverEntry],
+      {} as IntersectionObserver,
+    )
+
+    expect(onLeave).toHaveBeenCalledTimes(1)
+    expect(onEnter).not.toHaveBeenCalled()
+  })
+
+  it('should not throw when onLeave is not provided and element leaves', () => {
+    const target = document.createElement('div')
+    const onEnter = vi.fn()
+
+    observeIntersection(target, onEnter)
+
+    // Simulate leaving without onLeave — should not throw
+    expect(() => {
+      observerCallback!(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver,
+      )
+    }).not.toThrow()
+    expect(onEnter).not.toHaveBeenCalled()
+  })
+
+  it('should return a cleanup function that disconnects', () => {
+    const target = document.createElement('div')
+    const cleanup = observeIntersection(target, vi.fn())
+
+    cleanup()
+    expect(mockDisconnect).toHaveBeenCalledTimes(1)
+  })
+
+  it('should pass options to IntersectionObserver', () => {
+    const target = document.createElement('div')
+    const options = { threshold: 0.5, rootMargin: '10px' }
+
+    observeIntersection(target, vi.fn(), undefined, options)
+
+    expect(IntersectionObserver).toHaveBeenCalledWith(expect.any(Function), options)
   })
 })

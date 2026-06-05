@@ -418,6 +418,45 @@ import { isArray, formatFull, deepClone, unique } from 'pen-it'
   toArray(document.querySelectorAll('div'))
   ```
 
+- **`mergeArrays(...arrays)`** — 合并多个数组。
+
+  ```ts
+  mergeArrays([1, 2], [3, 4], [5])  // [1, 2, 3, 4, 5]
+  ```
+
+- **`flatten(arr, depth?)`** — 多维数组扁平化到指定层级（默认 1 层，传 `Infinity` 完全展开）。
+
+  ```ts
+  flatten([1, [2, [3, 4]], 5])          // [1, 2, [3, 4], 5]
+  flatten([1, [2, [3, 4]], 5], Infinity) // [1, 2, 3, 4, 5]
+  ```
+
+- **`arrFind(arr, key, value)`** — 对象数组中按 key-value 查找第一个匹配项。
+
+  ```ts
+  arrFind([{ id: 1 }, { id: 2 }], 'id', 2)  // { id: 2 }
+  ```
+
+- **`groupBy(arr, key)`** — 对象数组按指定属性分组。
+
+  ```ts
+  groupBy([{ type: 'fruit' }, { type: 'vegetable' }], 'type')
+  // => { fruit: [...], vegetable: [...] }
+  ```
+
+- **`filterEmptyValues(obj)`** — 移除对象中值为空（null / undefined / 空字符串）的属性。
+
+  ```ts
+  filterEmptyValues({ a: 1, b: '', c: null })  // { a: 1 }
+  ```
+
+- **`createRange(length, mapFn?)`** — 快速生成范围数组。
+
+  ```ts
+  createRange(5)  // [0, 1, 2, 3, 4]
+  createRange(3, (i) => i * 2)  // [0, 2, 4]
+  ```
+
 ---
 
 ### Cookie — `cookie`
@@ -502,6 +541,17 @@ import { isArray, formatFull, deepClone, unique } from 'pen-it'
 
   ```ts
   const off = onScroll(y => console.log(y))
+  ```
+
+#### 可视区域检测
+
+- **`observeIntersection(target, onEnter, onLeave?, options?)`** — 监听元素进入/离开可视区域，返回清理函数。
+
+  ```ts
+  const cleanup = observeIntersection(
+    document.querySelector('.footer')!,
+    () => loadMore(10),
+  );
   ```
 
 ---
