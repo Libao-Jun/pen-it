@@ -4,9 +4,6 @@
  * 获取 URL 参数对象
  * @param url - URL 字符串，默认使用当前页面地址
  * @returns 参数键值对对象
- * @example
- * getUrlParams("https://example.com?a=1&b=2")
- * // => { a: "1", b: "2" }
  */
 export const getUrlParams = (url?: string): Record<string, string> => {
   const params: Record<string, string> = {};
@@ -21,9 +18,6 @@ export const getUrlParams = (url?: string): Record<string, string> => {
  * @param key - 参数名
  * @param url - URL 字符串，默认使用当前页面地址
  * @returns 参数值，不存在则返回 null
- * @example
- * getUrlParam("a", "https://example.com?a=1")
- * // => "1"
  */
 export const getUrlParam = (key: string, url?: string): string | null => {
   return new URL(url || window.location.href).searchParams.get(key);
@@ -33,9 +27,6 @@ export const getUrlParam = (key: string, url?: string): string | null => {
  * 对象转 URL 参数字符串
  * @param params - 参数键值对对象，值为 null/undefined 的项会被过滤
  * @returns URL 参数字符串（不含 ? 前缀）
- * @example
- * toQueryString({ a: 1, b: "hello", c: null })
- * // => "a=1&b=hello"
  */
 export const toQueryString = (params: Record<string, any>): string => {
   return Object.entries(params)
@@ -51,9 +42,6 @@ export const toQueryString = (params: Record<string, any>): string => {
  * 优先使用 Clipboard API，失败时降级为 execCommand
  * @param text - 要复制的文本
  * @returns 复制成功返回 true，失败返回 false
- * @example
- * await copyToClipboard("Hello World")
- * // => true
  */
 export const copyToClipboard = async (text: string): Promise<boolean> => {
   // 优先使用 Clipboard API
@@ -83,8 +71,6 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
  * @param content - 文件内容
  * @param filename - 文件名
  * @param mimeType - MIME 类型，默认 "text/plain"
- * @example
- * downloadFile("Hello", "hello.txt")
  */
 export const downloadFile = (
   content: string | BlobPart,
@@ -104,8 +90,6 @@ export const downloadFile = (
  * 导出 JSON 为文件
  * @param data - 要导出的数据
  * @param filename - 文件名，默认 "data.json"
- * @example
- * exportJSON({ name: "张三", age: 30 })
  */
 export const exportJSON = (data: any, filename = "data.json"): void => {
   downloadFile(JSON.stringify(data, null, 2), filename, "application/json");
@@ -116,8 +100,6 @@ export const exportJSON = (data: any, filename = "data.json"): void => {
 /**
  * 滚动到顶部
  * @param behavior - 滚动行为，"smooth" 平滑 / "auto" 瞬间，默认 "smooth"
- * @example
- * scrollToTop()
  */
 export const scrollToTop = (behavior: ScrollBehavior = "smooth"): void => {
   window.scrollTo({ top: 0, behavior });
@@ -126,8 +108,6 @@ export const scrollToTop = (behavior: ScrollBehavior = "smooth"): void => {
 /**
  * 滚动到底部
  * @param behavior - 滚动行为，"smooth" 平滑 / "auto" 瞬间，默认 "smooth"
- * @example
- * scrollToBottom()
  */
 export const scrollToBottom = (behavior: ScrollBehavior = "smooth"): void => {
   window.scrollTo({ top: document.documentElement.scrollHeight, behavior });
@@ -137,9 +117,6 @@ export const scrollToBottom = (behavior: ScrollBehavior = "smooth"): void => {
  * 监听页面滚动（requestAnimationFrame 节流）
  * @param callback - 滚动回调，接收当前 scrollY 值
  * @returns 清理函数，调用后移除事件监听
- * @example
- * const cleanup = onScroll((y) => console.log(y));
- * cleanup(); // 停止监听
  */
 export const onScroll = (callback: (scrollY: number) => void): () => void => {
   let ticking = false;
@@ -165,12 +142,6 @@ export const onScroll = (callback: (scrollY: number) => void): () => void => {
  * @param onLeave - 元素离开可视区域时的回调（可选）
  * @param options - IntersectionObserver 配置项
  * @returns 清理函数，调用后停止观察
- * @example
- * const cleanup = observeIntersection(
- *   document.querySelector(".footer")!,
- *   () => loadMore(10),
- * );
- * cleanup(); // 停止观察
  */
 export const observeIntersection = (
   target: Element,

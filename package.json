@@ -1,6 +1,6 @@
 {
   "name": "pen-it",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "用笔锚定记忆中的前端常用工具函数，一个轻量级的前端实用程序库，支持类型检查、日期/数字格式化、字符串操作、数据存储、深度克隆、数组操作、Cookie 以及浏览器 API",
   "type": "module",
   "main": "dist/index.cjs",
@@ -21,23 +21,15 @@
     "dist"
   ],
   "keywords": [
+    "pen-it",
     "utils",
-    "utilities",
-    "toolkit",
-    "helpers",
-    "frontend",
-    "typescript",
-    "type-checking",
-    "date-format",
-    "number-format",
-    "deep-clone",
-    "string-manipulation",
-    "array-operations",
+    "function",
+    "copy",
     "cookie",
-    "localstorage",
-    "browser-api",
-    "debounce",
-    "throttle"
+    "format",
+    "data types",
+    "storage",
+    "browser"
   ],
   "author": "newborn_calf",
   "license": "MIT",

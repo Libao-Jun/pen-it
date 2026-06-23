@@ -5,8 +5,6 @@
  * @param name - Cookie 名称
  * @param value - Cookie 值
  * @param days - 有效天数，默认 7 天
- * @example
- * setCookie("token", "abc123", 30)
  */
 export const setCookie = (name: string, value: string, days = 0): void => {
   const expires = new Date();
@@ -18,9 +16,6 @@ export const setCookie = (name: string, value: string, days = 0): void => {
  * 获取 Cookie
  * @param name - Cookie 名称
  * @returns Cookie 值，不存在则返回 null
- * @example
- * getCookie("token")
- * // => "abc123"
  */
 export const getCookie = (name: string): string | null => {
   const match = document.cookie.match(
@@ -32,8 +27,6 @@ export const getCookie = (name: string): string | null => {
 /**
  * 删除 Cookie
  * @param name - Cookie 名称
- * @example
- * delCookie("token")
  */
 export const delCookie = (name: string): void => {
   setCookie(name, "", -1);

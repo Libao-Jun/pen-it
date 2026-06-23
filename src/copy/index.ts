@@ -6,11 +6,6 @@
  * @param obj - 要拷贝的值
  * @param hash - 内部 WeakMap 用于处理循环引用，调用方无需传入
  * @returns 深拷贝后的值
- * @example
- * const obj = { a: 1, b: { c: 2 }, d: new Date() };
- * const cloned = deepClone(obj);
- * // cloned.b !== obj.b
- * // cloned.d !== obj.d
  */
 export function deepClone<T>(obj: T, hash = new WeakMap<any, any>()): T {
   // null 或非对象类型直接返回
@@ -78,9 +73,6 @@ export function deepClone<T>(obj: T, hash = new WeakMap<any, any>()): T {
  * （不支持函数、undefined、Date、RegExp、Map、Set 等）
  * @param obj - 要拷贝的 JSON 安全值
  * @returns 深拷贝后的值
- * @example
- * deepCloneWithJSON({ a: 1, b: [2, 3] })
- * // => { a: 1, b: [2, 3] }
  */
 export function deepCloneWithJSON<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj));
@@ -93,10 +85,6 @@ export function deepCloneWithJSON<T>(obj: T): T {
  * 仅拷贝第一层属性，嵌套对象仍共享引用
  * @param obj - 要拷贝的对象或数组
  * @returns 浅拷贝后的值
- * @example
- * const obj = { a: 1, b: { c: 2 } };
- * const cloned = shallowClone(obj);
- * // cloned.b === obj.b（共享引用）
  */
 export function shallowClone<T>(obj: T): T {
   if (obj === null || typeof obj !== "object") {

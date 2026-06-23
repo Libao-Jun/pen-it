@@ -10,10 +10,6 @@
  * @param options.leading - 首次调用是否立即执行，默认 false
  * @param options.trailing - 停止调用后是否延迟执行，默认 true
  * @returns 防抖后的函数，附带 cancel 方法
- * @example
- * const fn = debounce((val: string) => console.log(val), 500)
- * fn("a"); fn("b"); fn("c")
- * // => "c"
  */
 export const debounce = <T extends (...args: any[]) => any>(
   fn: T,
@@ -57,10 +53,6 @@ export const debounce = <T extends (...args: any[]) => any>(
  * @param options.leading - 首次调用是否立即执行，默认 true
  * @param options.trailing - 最后一次调用后是否尾部执行，默认 true
  * @returns 节流后的函数，附带 cancel 方法
- * @example
- * const fn = throttle((val: string) => console.log(val), 500)
- * fn("a"); fn("b"); fn("c")
- * // => "a"，500ms 后输出 "c"
  */
 export const throttle = <T extends (...args: any[]) => any>(
   fn: T,

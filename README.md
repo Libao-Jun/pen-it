@@ -1,6 +1,6 @@
 # pen-it
 
-用笔锚定记忆中的前端常用工具函数，一个轻量级的前端实用程序库，支持类型检查、日期/数字格式化、字符串操作、数据存储、深度克隆、数组操作、Cookie 以及浏览器 API
+用“笔”锚定记忆，一个轻量级前端工具库，覆盖类型检查、日期格式化、数字处理、深克隆、本地存储、Cookie 及浏览器 API。零依赖，支持 Tree-shaking，让常用函数信手拈来。
 
 ## 安装
 
@@ -573,3 +573,32 @@ import { isArray, formatFull, deepClone, unique } from 'pen-it'
   fn('a'); fn('b'); fn('c')
   // => 'a'，500ms 后输出 'c'
   ```
+
+---
+
+## 更新日志
+
+### v1.0.7
+
+- **体积优化** — 移除 `src/` 下全部 86 处 JSDoc `@example` 示例注释（共 294 行），减少包体积
+- **文档** — README 底部新增更新日志模块
+
+### v1.0.6
+
+- **数组模块** — 新增 `mergeArrays` 数组合并、`flatten` 数组扁平化（支持任意层级）、`arrFind` 数组项查询、`groupBy` JSON 数组分组、`filterEmptyValues` 对象移除空值属性、`createRange` 快速生成范围数组
+- **浏览器模块** — 新增 `observeIntersection` 可视区域检测（基于 IntersectionObserver）
+
+### v1.0.5
+
+- **控制模块** — 新增 `debounce` 防抖与 `throttle` 节流
+
+### v1.0.4
+
+- 初始版本，包含以下模块：
+  - **类型判断** — `isArray` `isObject` `is` `isFunction` `isAsyncFunction` `isPromise` `isDate` `isNumber` `isInt` `isFloat` `isString` `isBoolean` `isSymbol` `isPrimitive` `isNull` `isDef` `isUnDef` `isNullOrUnDef` `isEmpty` `isEmptySv` `isEqual` `isHexColor` `isValidEmail` `isPC` `isWindow` `isElement` `isIOS` 共 27 个函数
+  - **格式化** — 日期时间（`formatFull` `formatFullReplace` `formatYMD` `formatWeek`）、数字货币（`formatRmb` `formatNum` `percentCN` `compactEN` `compactCN` `signed`）、字符串（`maskPhone` `spacePhone` `capitalize` `kebabToCamel` `camelToKebab` `toCamel` `firstUpper` `firstLower` `reverse` `trimAll` `truncate` `truncateByWords`）共 22 个函数
+  - **存储** — `localGet` `localSet` `localRm` `localClear` 共 4 个函数
+  - **拷贝** — `deepClone` `deepCloneWithJSON` `shallowClone` 共 3 个函数
+  - **数组** — `unique` `uniqueByKey` `sortNumAsc` `sortNumDesc` `sortByKey` `toArray` 共 6 个函数
+  - **Cookie** — `setCookie` `getCookie` `delCookie` 共 3 个函数
+  - **浏览器** — `getUrlParams` `getUrlParam` `toQueryString` `copyToClipboard` `downloadFile` `exportJSON` `scrollToTop` `scrollToBottom` `onScroll` 共 9 个函数

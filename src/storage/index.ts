@@ -4,9 +4,6 @@
  * 获取 localStorage
  * @param key - 存储键名
  * @returns 解析后的值，解析失败则返回原始字符串，键不存在返回 null
- * @example
- * localGet("user")
- * // => { name: "张三" }
  */
 export const localGet = <T = any>(key: string): T | null => {
   const value = localStorage.getItem(key);
@@ -22,8 +19,6 @@ export const localGet = <T = any>(key: string): T | null => {
  * 设置 localStorage
  * @param key - 存储键名
  * @param value - 存储值（会自动 JSON 序列化）
- * @example
- * localSet("user", { name: "张三" })
  */
 export const localSet = (key: string, value: unknown): void => {
   localStorage.setItem(key, JSON.stringify(value));
@@ -32,8 +27,6 @@ export const localSet = (key: string, value: unknown): void => {
 /**
  * 移除指定 localStorage
  * @param key - 存储键名
- * @example
- * localRm("user")
  */
 export const localRm = (key: string): void => {
   localStorage.removeItem(key);
@@ -41,8 +34,6 @@ export const localRm = (key: string): void => {
 
 /**
  * 清除所有 localStorage
- * @example
- * localClear()
  */
 export const localClear = (): void => {
   localStorage.clear();

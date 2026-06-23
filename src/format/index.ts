@@ -4,9 +4,6 @@
  * 完整日期时间（年/月/日 时分秒）_ 斜杠
  * @param date - Date 对象
  * @returns 格式化后的完整日期时间字符串，如 "2026/06/03 14:30:45"
- * @example
- * formatFull(new Date("2026-06-03T14:30:45"))
- * // => "2026/06/03 14:30:45"
  */
 export const formatFull = (date: Date): string => {
   const fun = new Intl.DateTimeFormat("zh-CN", {
@@ -25,9 +22,6 @@ export const formatFull = (date: Date): string => {
  * 完整日期时间（年-月-日 时分秒）_ 短横线
  * @param date - Date 对象
  * @returns 格式化后的完整日期时间字符串，如 "2026-06-03 14:30:45"
- * @example
- * formatFullReplace(new Date("2026-06-03T14:30:45"))
- * // => "2026-06-03 14:30:45"
  */
 export const formatFullReplace = (date: Date): string => {
   return formatFull(date).replace(/\//g, "-");
@@ -37,9 +31,6 @@ export const formatFullReplace = (date: Date): string => {
  * 中文年月日
  * @param date - Date 对象
  * @returns 格式化后的中文日期字符串，如 "2026年6月3日"
- * @example
- * formatYMD(new Date("2026-06-03"))
- * // => "2026年6月3日"
  */
 export const formatYMD = (date: Date): string => {
   const fun = new Intl.DateTimeFormat("zh-CN", {
@@ -54,9 +45,6 @@ export const formatYMD = (date: Date): string => {
  * 星期几
  * @param date - Date 对象
  * @returns 中文星期字符串，如 "星期三"
- * @example
- * formatWeek(new Date("2026-06-03"))
- * // => "星期三"
  */
 export const formatWeek = (date: Date): string => {
   const fun = new Intl.DateTimeFormat("zh-CN", {
@@ -72,9 +60,6 @@ export const formatWeek = (date: Date): string => {
  * @param value - 数值
  * @param options - 格式化选项
  * @returns 格式化后的货币字符串
- * @example
- * formatRmb(1234.56, { type: "zh-CN", currency: "CNY" })
- * // => "¥1,234.56"
  */
 export const formatRmb = (
   value: number,
@@ -91,9 +76,6 @@ export const formatRmb = (
  * 千位分隔符（数字格式化），中文（逗号分隔）
  * @param value - 数值
  * @returns 格式化后的千位分隔数字字符串
- * @example
- * formatNum(1234567)
- * // => "1,234,567"
  */
 export const formatNum = (value: number): string => {
   const numCN = new Intl.NumberFormat("zh-CN");
@@ -105,9 +87,6 @@ export const formatNum = (value: number): string => {
  * @param value - 百分比数值
  * @param digit - 保留的小数位数，默认为 0
  * @returns 格式化后的百分比字符串
- * @example
- * percentCN(0.1234, 2)
- * // => "12.34%"
  */
 export const percentCN = (value: number, digit: number = 0): string => {
   const percent = new Intl.NumberFormat("zh-CN", {
@@ -121,9 +100,6 @@ export const percentCN = (value: number, digit: number = 0): string => {
  * 紧凑计数法（大数简化）_ 英文缩写
  * @param value - 数值
  * @returns 格式化后的紧凑数字字符串（英文缩写）
- * @example
- * compactEN(12345)
- * // => "12K"
  */
 export const compactEN = (value: number): string => {
   const compact_en = new Intl.NumberFormat("en-US", {
@@ -137,9 +113,6 @@ export const compactEN = (value: number): string => {
  * 紧凑计数法（大数简化）_ 中文缩写
  * @param value - 数值
  * @returns 格式化后的紧凑数字字符串（中文缩写）
- * @example
- * compactCN(12345)
- * // => "1.2万"
  */
 export const compactCN = (value: number): string => {
   const compact_cn = new Intl.NumberFormat("zh-CN", {
@@ -154,12 +127,6 @@ export const compactCN = (value: number): string => {
  * @param value - 数值
  * @param digit - 保留的小数位数，默认为 0
  * @returns 格式化后的带正负号的数值显示
- * @example
- * signed(42, 1)
- * // => "+42.0"
- * @example
- * signed(-5)
- * // => "-5"
  */
 export const signed = (value: number, digit = 0): string => {
   const num_mark = new Intl.NumberFormat("en-US", {
@@ -175,9 +142,6 @@ export const signed = (value: number, digit = 0): string => {
  * 手机号格式化脱敏 _ 隐藏中间 4 位数
  * @param phone - 手机号码
  * @returns 手机号格式化脱敏后的手机号
- * @example
- * maskPhone("13812345678")
- * // => "138****5678"
  */
 export const maskPhone = (phone: string): string => {
   return phone.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2");
@@ -187,9 +151,6 @@ export const maskPhone = (phone: string): string => {
  * 手机号格式化 _ 空格分隔
  * @param phone - 手机号
  * @returns 手机号空格格式化的手机号
- * @example
- * spacePhone("13812345678")
- * // => "138 1234 5678"
  */
 export const spacePhone = (phone: string): string => {
   return phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1 $2 $3");
@@ -199,9 +160,6 @@ export const spacePhone = (phone: string): string => {
  * 每个单词首字母大写
  * @param str - 字符串
  * @returns 每个单词首字母大写后的字符串
- * @example
- * capitalize("hello world")
- * // => "Hello World"
  */
 export const capitalize = (str: string): string => {
   return str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -211,9 +169,6 @@ export const capitalize = (str: string): string => {
  * 短横线连接转小驼峰（kebab-case → camelCase）
  * @param str - 字符串
  * @returns 转换后的小驼峰字符串
- * @example
- * kebabToCamel("hello-world")
- * // => "helloWorld"
  */
 export const kebabToCamel = (str: string): string => {
   return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
@@ -223,9 +178,6 @@ export const kebabToCamel = (str: string): string => {
  * 大驼峰或小驼峰 _ 转为 ‘-’ 短横线连接
  * @param str - 字符串
  * @returns 大驼峰或小驼峰命名格式化的字符串
- * @example
- * camelToKebab("helloWorld")
- * // => "hello-world"
  */
 export const camelToKebab = (str: string): string => {
   return str.replace(/([A-Z])/g, "-$1").toLowerCase();
@@ -237,9 +189,6 @@ export const camelToKebab = (str: string): string => {
  * @param maxLength - 截断位置
  * @param suffix - 自定义的替换截断后的内容
  * @returns 超长文本截断后内容
- * @example
- * truncate("Hello World", 8)
- * // => "Hello..."
  */
 export const truncate = (str: string, maxLength: number, suffix = "..."): string => {
   if (str.length <= maxLength) return str;
@@ -252,9 +201,6 @@ export const truncate = (str: string, maxLength: number, suffix = "..."): string
  * @param maxWords - 截断位置
  * @param suffix - 自定义的替换截断后的内容
  * @returns 超长文本截断后内容
- * @example
- * truncateByWords("你好世界欢迎你", 4)
- * // => "你好世界..."
  */
 export const truncateByWords = (
   str: string,
@@ -270,9 +216,6 @@ export const truncateByWords = (
  * 去除所有空格 _ 前后中间
  * @param str - 内容
  * @returns 去除空格后的内容
- * @example
- * trimAll(" hello  world ")
- * // => "helloworld"
  */
 export const trimAll = (str: string): string => str.replace(/\s+/g, "");
 
@@ -280,9 +223,6 @@ export const trimAll = (str: string): string => str.replace(/\s+/g, "");
  * 下划线转驼峰（snake_case → camelCase）
  * @param str - 字符串
  * @returns 转换后的驼峰字符串
- * @example
- * toCamel("hello_world")
- * // => "helloWorld"
  */
 export const toCamel = (str: string): string => {
   return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
@@ -292,9 +232,6 @@ export const toCamel = (str: string): string => {
  * 首字母大写
  * @param str - 字符串
  * @returns 首字母大写后的字符串
- * @example
- * firstUpper("hello")
- * // => "Hello"
  */
 export const firstUpper = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -304,9 +241,6 @@ export const firstUpper = (str: string): string => {
  * 首字母小写
  * @param str - 字符串
  * @returns 首字母小写后的字符串
- * @example
- * firstLower("Hello")
- * // => "hello"
  */
 export const firstLower = (str: string): string => {
   return str.charAt(0).toLowerCase() + str.slice(1);
@@ -316,9 +250,6 @@ export const firstLower = (str: string): string => {
  * 反转字符串
  * @param str - 字符串
  * @returns 反转后的字符串
- * @example
- * reverse("hello")
- * // => "olleh"
  */
 export const reverse = (str: string): string => {
   return str.split("").reverse().join("");
