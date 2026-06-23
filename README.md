@@ -578,7 +578,12 @@ import { isArray, formatFull, deepClone, unique } from 'pen-it'
 
 ## 更新日志
 
-### v1.0.7
+### v1.0.9
+
+- **构建优化** — rolldown 开启 `minify: true`压缩 JS/CJS（注释/空白移除 + 变量名缩短）
+- **类型声明优化** — 移除 `.d.ts` 中冗余的 JSDoc 注释
+
+### v1.0.7 & v1.0.8
 
 - **体积优化** — 移除JSDoc `@example` 示例注释（共 294 行），减少包体积
 - **文档** — README 底部新增更新日志模块
