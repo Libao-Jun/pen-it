@@ -1,5 +1,3 @@
-// 日期时间格式化
-
 /**
  * 完整日期时间（年/月/日 时分秒）_ 斜杠
  * @param date - Date 对象
@@ -52,8 +50,6 @@ export const formatWeek = (date: Date): string => {
   });
   return fun.format(date);
 };
-
-// 数字与货币格式化
 
 /**
  * 货币格式化
@@ -135,8 +131,6 @@ export const signed = (value: number, digit = 0): string => {
   });
   return num_mark.format(value);
 };
-
-// 字符串格式化
 
 /**
  * 手机号格式化脱敏 _ 隐藏中间 4 位数

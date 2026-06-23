@@ -1,5 +1,3 @@
-// 去重
-
 /**
  * Set 去重
  * @param arr - 数组
@@ -21,8 +19,6 @@ export const uniqueByKey = <T extends Record<string, any>>(
 ): T[] => {
   return [...new Map(arr.map((item) => [item[key], item])).values()];
 };
-
-// 排序
 
 /**
  * 数值升序
@@ -59,8 +55,6 @@ export const sortByKey = <T extends Record<string, any>>(
   );
 };
 
-// 类型转换辅助
-
 /**
  * 类数组转数组
  * @param arrayLike - 类数组对象（如 NodeList、arguments）
@@ -69,8 +63,6 @@ export const sortByKey = <T extends Record<string, any>>(
 export const toArray = <T>(arrayLike: ArrayLike<T>): T[] => {
   return Array.from(arrayLike);
 };
-
-// 合并
 
 /**
  * 合并多个数组
@@ -81,8 +73,6 @@ export const mergeArrays = <T>(...arrays: T[][]): T[] => {
   return ([] as T[]).concat(...arrays);
 };
 
-// 扁平化
-
 /**
  * 将多维数组扁平化到指定层级
  * @param arr - 多维数组
@@ -92,8 +82,6 @@ export const mergeArrays = <T>(...arrays: T[][]): T[] => {
 export const flatten = <T>(arr: any[], depth: number = 1): T[] => {
   return arr.flat(depth);
 };
-
-// 查询
 
 /**
  * 在对象数组中按 key-value 查找第一个匹配项
@@ -109,8 +97,6 @@ export const arrFind = <T extends Record<string, any>>(
 ): T | undefined => {
   return arr.find((item) => item[key] === value);
 };
-
-// 分组
 
 /**
  * 将对象数组按指定属性分组
@@ -135,8 +121,6 @@ export const groupBy = <T extends Record<string, any>>(
   );
 };
 
-// 对象过滤
-
 /**
  * 移除对象中值为空（null / undefined / 空字符串）的属性
  * @param obj - 待过滤的对象
@@ -149,8 +133,6 @@ export const filterEmptyValues = <T extends Record<string, any>>(
     Object.entries(obj).filter(([, v]) => v !== null && v !== undefined && v !== ""),
   ) as Partial<T>;
 };
-
-// 快速生成
 
 /**
  * 根据长度和映射函数快速生成数组

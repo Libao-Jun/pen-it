@@ -1,5 +1,3 @@
-// localStorage 操作
-
 /**
  * 获取 localStorage
  * @param key - 存储键名

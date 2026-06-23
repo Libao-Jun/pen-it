@@ -1,5 +1,3 @@
-// Cookie 操作
-
 /**
  * 设置 Cookie
  * @param name - Cookie 名称

@@ -1,5 +1,3 @@
-// 深拷贝
-
 /**
  * 递归深拷贝
  * 支持 Date、RegExp、Map、Set、Array、Object 以及循环引用
@@ -77,8 +75,6 @@ export function deepClone<T>(obj: T, hash = new WeakMap<any, any>()): T {
 export function deepCloneWithJSON<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj));
 }
-
-// 浅拷贝
 
 /**
  * 浅拷贝

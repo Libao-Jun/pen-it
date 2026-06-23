@@ -1,5 +1,3 @@
-// URL 参数操作
-
 /**
  * 获取 URL 参数对象
  * @param url - URL 字符串，默认使用当前页面地址
@@ -34,8 +32,6 @@ export const toQueryString = (params: Record<string, any>): string => {
     .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
     .join("&");
 };
-
-// 剪贴板与文件
 
 /**
  * 复制文本到剪贴板
@@ -95,8 +91,6 @@ export const exportJSON = (data: any, filename = "data.json"): void => {
   downloadFile(JSON.stringify(data, null, 2), filename, "application/json");
 };
 
-// 页面滚动
-
 /**
  * 滚动到顶部
  * @param behavior - 滚动行为，"smooth" 平滑 / "auto" 瞬间，默认 "smooth"
@@ -132,8 +126,6 @@ export const onScroll = (callback: (scrollY: number) => void): () => void => {
   window.addEventListener("scroll", handler);
   return () => window.removeEventListener("scroll", handler);
 };
-
-// 可视区域检测
 
 /**
  * 监听目标元素是否进入/离开可视区域

@@ -1,10 +1,8 @@
 // 防抖与节流
 // 参考：https://kettanaito.com/blog/debounce-vs-throttle
 
-// 防抖
-
 /**
- * 防抖 —— 在事件被触发 n 秒后再执行，如果 n 秒内再次触发则重新计时
+ * 防抖: 在事件被触发 n 秒后再执行，如果 n 秒内再次触发则重新计时
  * @param fn - 需要防抖的函数
  * @param delay - 延迟时间（毫秒），默认 300
  * @param options.leading - 首次调用是否立即执行，默认 false
@@ -44,10 +42,8 @@ export const debounce = <T extends (...args: any[]) => any>(
   return debounced;
 };
 
-// 节流
-
 /**
- * 节流 —— 固定间隔内最多执行一次，超出频率的调用被忽略
+ * 节流: 固定间隔内最多执行一次，超出频率的调用被忽略
  * @param fn - 需要节流的函数
  * @param interval - 间隔时间（毫秒），默认 300
  * @param options.leading - 首次调用是否立即执行，默认 true
