@@ -580,7 +580,7 @@ import { isArray, formatFull, deepClone, unique } from 'pen-it'
 
 ### v1.0.7
 
-- **体积优化** — 移除 `src/` 下全部 86 处 JSDoc `@example` 示例注释（共 294 行），减少包体积
+- **体积优化** — 移除JSDoc `@example` 示例注释（共 294 行），减少包体积
 - **文档** — README 底部新增更新日志模块
 
 ### v1.0.6
