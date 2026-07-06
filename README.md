@@ -11,599 +11,734 @@ pnpm add pen-it
 ## 使用
 
 ```ts
-import { isArray, formatFull, deepClone, unique } from 'pen-it'
+import { isArray, formatFull, deepClone, unique } from "pen-it";
 ```
-
----
 
 ## API
 
-### 类型判断 — `is`
-
-- **`isArray(value)`** — 判断是否为数组。
-
-  ```ts
-  isArray([1, 2, 3])  // true
-  ```
-
-- **`isObject(value)`** — 判断是否为对象（不含数组）。
-
-  ```ts
-  isObject({ a: 1 })  // true
-  ```
-
-- **`is(val, type)`** — 通用类型判断（内部工具）。
-
-  ```ts
-  is([], 'Array')  // true
-  ```
-
-- **`isFunction(val)`** — 判断是否为函数。
-
-  ```ts
-  isFunction(() => {})  // true
-  ```
-
-- **`isAsyncFunction(val)`** — 判断是否为异步函数。
-
-  ```ts
-  isAsyncFunction(async () => {})  // true
-  ```
-
-- **`isPromise(value)`** — 判断是否为 Promise。
-
-  ```ts
-  isPromise(Promise.resolve())  // true
-  ```
-
-- **`isDate(val)`** — 判断是否为 Date 对象。
-
-  ```ts
-  isDate(new Date())  // true
-  ```
-
-- **`isNumber(val)`** — 判断是否为数字（含 NaN/Infinity）。
-
-  ```ts
-  isNumber(42)  // true
-  ```
-
-- **`isInt(val)`** — 判断是否为整数。
-
-  ```ts
-  isInt(42)  // true
-  ```
-
-- **`isFloat(val)`** — 判断是否为浮点数。
-
-  ```ts
-  isFloat(3.14)  // true
-  ```
-
-- **`isString(val)`** — 判断是否为字符串。
-
-  ```ts
-  isString('hello')  // true
-  ```
-
-- **`isBoolean(val)`** — 判断是否为布尔值。
-
-  ```ts
-  isBoolean(true)  // true
-  ```
-
-- **`isSymbol(value)`** — 判断是否为 Symbol。
-
-  ```ts
-  isSymbol(Symbol('foo'))  // true
-  ```
-
-- **`isPrimitive(value)`** — 判断是否为原始类型。
-
-  ```ts
-  isPrimitive(42)  // true
-  ```
-
-- **`isNull(val)`** — 判断是否为 null。
-
-  ```ts
-  isNull(null)  // true
-  ```
-
-- **`isDef(val)`** — 判断是否不是 undefined。
-
-  ```ts
-  isDef('hello')  // true
-  ```
-
-- **`isUnDef(val)`** — 判断是否为 undefined。
-
-  ```ts
-  isUnDef(undefined)  // true
-  ```
-
-- **`isNullOrUnDef(val)`** — 判断是否为 null 或 undefined。
-
-  ```ts
-  isNullOrUnDef(null)  // true
-  ```
-
-- **`isEmpty(value)`** — 判断是否为空（完备版：支持 Date/Map/Set 等）。
-
-  ```ts
-  isEmpty('')   // true
-  isEmpty([])   // true
-  isEmpty({})   // true
-  ```
-
-- **`isEmptySv(value)`** — 判断是否为空（简化版）。
-
-  ```ts
-  isEmptySv([])  // true
-  ```
-
-- **`isEqual(x, y)`** — 深度相等比较（支持 Date/RegExp）。
-
-  ```ts
-  isEqual({ a: 1 }, { a: 1 })  // true
-  ```
-
-- **`isHexColor(str)`** — 判断是否为十六进制颜色。
-
-  ```ts
-  isHexColor('#fff')  // true
-  ```
-
-- **`isValidEmail(email)`** — 判断是否为有效邮箱。
-
-  ```ts
-  isValidEmail('a@b.com')  // true
-  ```
-
-- **`isPC()`** — 判断是否为浏览器环境。
-
-  ```ts
-  isPC()  // true
-  ```
-
-- **`isWindow(val)`** — 判断是否为 window 对象。
-
-  ```ts
-  isWindow(window)  // true
-  ```
-
-- **`isElement(val)`** — 判断是否为 DOM 元素。
-
-  ```ts
-  isElement(document.body)  // true
-  ```
-
-- **`isIOS()`** — 判断设备是否为 iOS。
-
-  ```ts
-  isIOS()  // true
-  ```
+### 类型判断
 
 ---
 
-### 日期时间格式化 — `format`
+#### isArray(value)
 
-- **`formatFull(date)`** — 完整日期时间（斜杠分隔）。
+> — 判断是否为数组。
 
-  ```ts
-  formatFull(new Date())  // "2026/06/03 14:30:45"
-  ```
+```ts
+isArray([1, 2, 3]); // true
+```
 
-- **`formatFullReplace(date)`** — 完整日期时间（短横线分隔）。
+#### isObject(value)
 
-  ```ts
-  formatFullReplace(new Date())  // "2026-06-03 14:30:45"
-  ```
+> — 判断是否为对象（不含数组）。
 
-- **`formatYMD(date)`** — 中文年月日。
+```ts
+isObject({ a: 1 }); // true
+```
 
-  ```ts
-  formatYMD(new Date())  // "2026年6月3日"
-  ```
+#### is(val, type)
 
-- **`formatWeek(date)`** — 星期几。
+> — 通用类型判断（内部工具）。
 
-  ```ts
-  formatWeek(new Date())  // "星期三"
-  ```
+```ts
+is([], "Array"); // true
+```
+
+#### isFunction(val)
+
+> — 判断是否为函数。
+
+```ts
+isFunction(() => {}); // true
+```
+
+#### isAsyncFunction(val)
+
+> — 判断是否为异步函数。
+
+```ts
+isAsyncFunction(async () => {}); // true
+```
+
+#### isPromise(value)
+
+> — 判断是否为 Promise。
+
+```ts
+isPromise(Promise.resolve()); // true
+```
+
+#### isDate(val)
+
+> — 判断是否为 Date 对象。
+
+```ts
+isDate(new Date()); // true
+```
+
+#### isNumber(val)
+
+> — 判断是否为数字（含 NaN/Infinity）。
+
+```ts
+isNumber(42); // true
+```
+
+#### isInt(val)
+
+> — 判断是否为整数。
+
+```ts
+isInt(42); // true
+```
+
+#### isFloat(val)
+
+> — 判断是否为浮点数。
+
+```ts
+isFloat(3.14); // true
+```
+
+#### isString(val)
+
+> — 判断是否为字符串。
+
+```ts
+isString("hello"); // true
+```
+
+#### isBoolean(val)
+
+> — 判断是否为布尔值。
+
+```ts
+isBoolean(true); // true
+```
+
+#### isSymbol(value)
+
+> — 判断是否为 Symbol。
+
+```ts
+isSymbol(Symbol("foo")); // true
+```
+
+#### isPrimitive(value)
+
+> — 判断是否为原始类型。
+
+```ts
+isPrimitive(42); // true
+```
+
+#### isNull(val)
+
+> — 判断是否为 null。
+
+```ts
+isNull(null); // true
+```
+
+#### isDef(val)
+
+> — 判断是否不是 undefined。
+
+```ts
+isDef("hello"); // true
+```
+
+#### isUnDef(val)
+
+> — 判断是否为 undefined。
+
+```ts
+isUnDef(undefined); // true
+```
+
+#### isNullOrUnDef(val)
+
+> — 判断是否为 null 或 undefined。
+
+```ts
+isNullOrUnDef(null); // true
+```
+
+#### isEmpty(value)
+
+> — 判断是否为空（完备版：支持 Date/Map/Set 等）。
+
+```ts
+isEmpty(""); // true
+isEmpty([]); // true
+isEmpty({}); // true
+```
+
+#### isEmptySv(value)
+
+> — 判断是否为空（简化版）。
+
+```ts
+isEmptySv([]); // true
+```
+
+#### isEqual(x, y)
+
+> — 深度相等比较（支持 Date/RegExp）。
+
+```ts
+isEqual({ a: 1 }, { a: 1 }); // true
+```
+
+#### isHexColor(str)
+
+> — 判断是否为十六进制颜色。
+
+```ts
+isHexColor("#fff"); // true
+```
+
+#### isValidEmail(email)
+
+> — 判断是否为有效邮箱。
+
+```ts
+isValidEmail("a@b.com"); // true
+```
+
+#### isPC()
+
+> — 判断是否为浏览器环境。
+
+```ts
+isPC(); // true
+```
+
+#### isWindow(val)
+
+> — 判断是否为 window 对象。
+
+```ts
+isWindow(window); // true
+```
+
+#### isElement(val)
+
+> — 判断是否为 DOM 元素。
+
+```ts
+isElement(document.body); // true
+```
+
+#### isIOS()
+
+> — 判断设备是否为 iOS。
+
+```ts
+isIOS(); // true
+```
+
+### 时间日期格式化
 
 ---
 
-### 数字与货币格式化 — `format`
+#### formatFull(date)
 
-- **`formatRmb(value, options)`** — 货币格式化（人民币）。
+> — 完整日期时间（斜杠分隔）。
 
-  ```ts
-  formatRmb(1234.56, { type: 'zh-CN', currency: 'CNY' })  // "¥1,234.56"
-  ```
+```ts
+formatFull(new Date()); // "2026/06/03 14:30:45"
+```
 
-- **`formatNum(value)`** — 千位分隔符。
+#### formatFullReplace(date)
 
-  ```ts
-  formatNum(1234567)  // "1,234,567"
-  ```
+> — 完整日期时间（短横线分隔）。
 
-- **`percentCN(value, digit)`** — 百分比格式化。
+```ts
+formatFullReplace(new Date()); // "2026-06-03 14:30:45"
+```
 
-  ```ts
-  percentCN(0.1234, 2)  // "12.34%"
-  ```
+#### formatYMD(date)
 
-- **`compactEN(value)`** — 大数简化（英文缩写）。
+> — 中文年月日。
 
-  ```ts
-  compactEN(12345)  // "12K"
-  ```
+```ts
+formatYMD(new Date()); // "2026年6月3日"
+```
 
-- **`compactCN(value)`** — 大数简化（中文缩写）。
+#### formatWeek(date)
 
-  ```ts
-  compactCN(12345)  // "1.2万"
-  ```
+> — 星期几。
 
-- **`signed(value, digit)`** — 带正负号显示。
+```ts
+formatWeek(new Date()); // "星期三"
+```
 
-  ```ts
-  signed(42, 1)  // "+42.0"
-  ```
+### 数字与货币格式化
 
 ---
 
-### 字符串处理 — `format`
+#### formatRmb(value, options)
 
-- **`maskPhone(phone)`** — 手机号脱敏（隐藏中间4位）。
+> — 货币格式化（人民币）。
 
-  ```ts
-  maskPhone('13812345678')  // "138****5678"
-  ```
+```ts
+formatRmb(1234.56, { type: "zh-CN", currency: "CNY" }); // "¥1,234.56"
+```
 
-- **`spacePhone(phone)`** — 手机号空格分隔。
+#### formatNum(value)
 
-  ```ts
-  spacePhone('13812345678')  // "138 1234 5678"
-  ```
+> — 千位分隔符。
 
-- **`capitalize(str)`** — 每个单词首字母大写。
+```ts
+formatNum(1234567); // "1,234,567"
+```
 
-  ```ts
-  capitalize('hello world')  // "Hello World"
-  ```
+#### percentCN(value, digit)
 
-- **`kebabToCamel(str)`** — 短横线转小驼峰。
+> — 百分比格式化。
 
-  ```ts
-  kebabToCamel('hello-world')  // "helloWorld"
-  ```
+```ts
+percentCN(0.1234, 2); // "12.34%"
+```
 
-- **`camelToKebab(str)`** — 驼峰转短横线。
+#### compactEN(value)
 
-  ```ts
-  camelToKebab('helloWorld')  // "hello-world"
-  ```
+> — 大数简化（英文缩写）。
 
-- **`toCamel(str)`** — 下划线转驼峰。
+```ts
+compactEN(12345); // "12K"
+```
 
-  ```ts
-  toCamel('hello_world')  // "helloWorld"
-  ```
+#### compactCN(value)
 
-- **`firstUpper(str)`** — 首字母大写。
+> — 大数简化（中文缩写）。
 
-  ```ts
-  firstUpper('hello')  // "Hello"
-  ```
+```ts
+compactCN(12345); // "1.2万"
+```
 
-- **`firstLower(str)`** — 首字母小写。
+#### signed(value, digit)
 
-  ```ts
-  firstLower('Hello')  // "hello"
-  ```
+> — 带正负号显示。
 
-- **`reverse(str)`** — 反转字符串。
+```ts
+signed(42, 1); // "+42.0"
+```
 
-  ```ts
-  reverse('hello')  // "olleh"
-  ```
-
-- **`trimAll(str)`** — 去除所有空格。
-
-  ```ts
-  trimAll(' h e l lo ')  // "hello"
-  ```
-
-- **`truncate(str, max, suffix?)`** — 超长文本截断。
-
-  ```ts
-  truncate('Hello World', 8)  // "Hello..."
-  ```
-
-- **`truncateByWords(str, max, suffix?)`** — 按字数截断（中文友好）。
-
-  ```ts
-  truncateByWords('你好世界欢迎你', 4)  // "你好世界..."
-  ```
+### 字符串处理
 
 ---
 
-### 存储 — `storage`
+#### maskPhone(phone)
 
-- **`localGet<T>(key)`** — 获取 localStorage（自动 JSON 解析）。
+> — 手机号脱敏（隐藏中间4位）。
 
-  ```ts
-  localGet('user')  // { name: '张三' }
-  ```
+```ts
+maskPhone("13812345678"); // "138****5678"
+```
 
-- **`localSet(key, value)`** — 设置 localStorage（自动 JSON 序列化）。
+#### spacePhone(phone)
 
-  ```ts
-  localSet('user', { name: '张三' })
-  ```
+> — 手机号空格分隔。
 
-- **`localRm(key)`** — 移除指定 localStorage。
+```ts
+spacePhone("13812345678"); // "138 1234 5678"
+```
 
-  ```ts
-  localRm('user')
-  ```
+#### capitalize(str)
 
-- **`localClear()`** — 清除所有 localStorage。
+> — 每个单词首字母大写。
 
-  ```ts
-  localClear()
-  ```
+```ts
+capitalize("hello world"); // "Hello World"
+```
 
----
+#### kebabToCamel(str)
 
-### 拷贝 — `copy`
+> — 短横线转小驼峰。
 
-- **`deepClone(obj)`** — 递归深拷贝（支持 Date/RegExp/Map/Set/循环引用）。
+```ts
+kebabToCamel("hello-world"); // "helloWorld"
+```
 
-  ```ts
-  deepClone({ a: 1, b: { c: 2 } })
-  ```
+#### camelToKebab(str)
 
-- **`deepCloneWithJSON(obj)`** — JSON 深拷贝（仅 JSON 安全类型）。
+> — 驼峰转短横线。
 
-  ```ts
-  deepCloneWithJSON({ a: 1 })
-  ```
+```ts
+camelToKebab("helloWorld"); // "hello-world"
+```
 
-- **`shallowClone(obj)`** — 浅拷贝（仅第一层）。
+#### toCamel(str)
 
-  ```ts
-  shallowClone({ a: 1, b: { c: 2 } })
-  ```
+> — 下划线转驼峰。
 
----
+```ts
+toCamel("hello_world"); // "helloWorld"
+```
 
-### 数组 — `array`
+#### firstUpper(str)
 
-- **`unique(arr)`** — Set 去重。
+> — 首字母大写。
 
-  ```ts
-  unique([1, 2, 2, 3])  // [1, 2, 3]
-  ```
+```ts
+firstUpper("hello"); // "Hello"
+```
 
-- **`uniqueByKey(arr, key)`** — 对象数组按 key 去重。
+#### firstLower(str)
 
-  ```ts
-  uniqueByKey([{ id: 1 }, { id: 1 }], 'id')
-  ```
+> — 首字母小写。
 
-- **`sortNumAsc(arr)`** — 数值升序。
+```ts
+firstLower("Hello"); // "hello"
+```
 
-  ```ts
-  sortNumAsc([3, 1, 2])  // [1, 2, 3]
-  ```
+#### reverse(str)
 
-- **`sortNumDesc(arr)`** — 数值降序。
+> — 反转字符串。
 
-  ```ts
-  sortNumDesc([1, 3, 2])  // [3, 2, 1]
-  ```
+```ts
+reverse("hello"); // "olleh"
+```
 
-- **`sortByKey(arr, key, order?)`** — 按对象属性排序。
+#### trimAll(str)
 
-  ```ts
-  sortByKey([{ age: 30 }, { age: 20 }], 'age')
-  ```
+> — 去除所有空格。
 
-- **`toArray(arrayLike)`** — 类数组转数组。
+```ts
+trimAll(" h e l lo "); // "hello"
+```
 
-  ```ts
-  toArray(document.querySelectorAll('div'))
-  ```
+#### truncate(str, max, suffix?)
 
-- **`mergeArrays(...arrays)`** — 合并多个数组。
+> — 超长文本截断。
 
-  ```ts
-  mergeArrays([1, 2], [3, 4], [5])  // [1, 2, 3, 4, 5]
-  ```
+```ts
+truncate("Hello World", 8); // "Hello..."
+```
 
-- **`flatten(arr, depth?)`** — 多维数组扁平化到指定层级（默认 1 层，传 `Infinity` 完全展开）。
+#### truncateByWords(str, max, suffix?)
 
-  ```ts
-  flatten([1, [2, [3, 4]], 5])          // [1, 2, [3, 4], 5]
-  flatten([1, [2, [3, 4]], 5], Infinity) // [1, 2, 3, 4, 5]
-  ```
+> — 按字数截断（中文友好）。
 
-- **`arrFind(arr, key, value)`** — 对象数组中按 key-value 查找第一个匹配项。
+```ts
+truncateByWords("你好世界欢迎你", 4); // "你好世界..."
+```
 
-  ```ts
-  arrFind([{ id: 1 }, { id: 2 }], 'id', 2)  // { id: 2 }
-  ```
-
-- **`groupBy(arr, key)`** — 对象数组按指定属性分组。
-
-  ```ts
-  groupBy([{ type: 'fruit' }, { type: 'vegetable' }], 'type')
-  // => { fruit: [...], vegetable: [...] }
-  ```
-
-- **`filterEmptyValues(obj)`** — 移除对象中值为空（null / undefined / 空字符串）的属性。
-
-  ```ts
-  filterEmptyValues({ a: 1, b: '', c: null })  // { a: 1 }
-  ```
-
-- **`createRange(length, mapFn?)`** — 快速生成范围数组。
-
-  ```ts
-  createRange(5)  // [0, 1, 2, 3, 4]
-  createRange(3, (i) => i * 2)  // [0, 2, 4]
-  ```
+### 存储
 
 ---
 
-### Cookie — `cookie`
+#### localGet&lt;T&gt;(key)
 
-- **`setCookie(name, value, days?)`** — 设置 Cookie（默认7天）。
+> — 获取 localStorage（自动 JSON 解析）。
 
-  ```ts
-  setCookie('token', 'abc123', 30)
-  ```
+```ts
+localGet("user"); // { name: '张三' }
+```
 
-- **`getCookie(name)`** — 获取 Cookie。
+#### localSet(key, value)
 
-  ```ts
-  getCookie('token')  // "abc123"
-  ```
+> — 设置 localStorage（自动 JSON 序列化）。
 
-- **`delCookie(name)`** — 删除 Cookie。
+```ts
+localSet("user", { name: "张三" });
+```
 
-  ```ts
-  delCookie('token')
-  ```
+#### localRm(key)
 
----
+> — 移除指定 localStorage。
 
-### 浏览器工具 — `browser`
+```ts
+localRm("user");
+```
 
-#### URL 参数
+#### localClear()
 
-- **`getUrlParams(url?)`** — 获取 URL 参数对象。
+> — 清除所有 localStorage。
 
-  ```ts
-  getUrlParams('?a=1&b=2')  // { a: '1', b: '2' }
-  ```
+```ts
+localClear();
+```
 
-- **`getUrlParam(key, url?)`** — 获取单个 URL 参数。
-
-  ```ts
-  getUrlParam('a')  // "1"
-  ```
-
-- **`toQueryString(params)`** — 对象转 URL 参数字符串。
-
-  ```ts
-  toQueryString({ a: 1, b: 'hello' })  // "a=1&b=hello"
-  ```
-
-#### 剪贴板与文件
-
-- **`copyToClipboard(text)`** — 复制文本到剪贴板（支持降级）。
-
-  ```ts
-  await copyToClipboard('Hello')
-  ```
-
-- **`downloadFile(content, filename, mimeType?)`** — 下载文件（Blob）。
-
-  ```ts
-  downloadFile('Hello', 'hello.txt')
-  ```
-
-- **`exportJSON(data, filename?)`** — 导出 JSON 为文件。
-
-  ```ts
-  exportJSON({ name: '张三' })
-  ```
-
-#### 页面滚动
-
-- **`scrollToTop(behavior?)`** — 滚动到顶部（默认平滑）。
-
-  ```ts
-  scrollToTop()
-  ```
-
-- **`scrollToBottom(behavior?)`** — 滚动到底部（默认平滑）。
-
-  ```ts
-  scrollToBottom()
-  ```
-
-- **`onScroll(callback)`** — 监听滚动（rAF 节流），返回清理函数。
-
-  ```ts
-  const off = onScroll(y => console.log(y))
-  ```
-
-#### 可视区域检测
-
-- **`observeIntersection(target, onEnter, onLeave?, options?)`** — 监听元素进入/离开可视区域，返回清理函数。
-
-  ```ts
-  const cleanup = observeIntersection(
-    document.querySelector('.footer')!,
-    () => loadMore(10),
-  );
-  ```
+### 拷贝
 
 ---
 
-### 防抖与节流 — `control`
+#### deepClone(obj)
 
-- **`debounce(fn, delay?, options?)`** — 防抖，停止调用 delay 毫秒后才执行。
+> — 递归深拷贝（支持 Date/RegExp/Map/Set/循环引用）。
 
-  ```ts
-  const fn = debounce((val: string) => console.log(val), 500)
-  fn('a'); fn('b'); fn('c')
-  // => 'c'
-  ```
+```ts
+deepClone({ a: 1, b: { c: 2 } });
+```
 
-- **`throttle(fn, interval?, options?)`** — 节流，固定间隔内最多执行一次。
+#### deepCloneWithJSON(obj)
 
-  ```ts
-  const fn = throttle((val: string) => console.log(val), 500)
-  fn('a'); fn('b'); fn('c')
-  // => 'a'，500ms 后输出 'c'
-  ```
+> — JSON 深拷贝（仅 JSON 安全类型）。
+
+```ts
+deepCloneWithJSON({ a: 1 });
+```
+
+#### structClone(obj, options?)
+
+> — structuredClone 深拷贝（不支持函数/Symbol）。
+
+```ts
+structClone({ a: 1, b: { c: 2 } });
+```
+
+#### shallowClone(obj)
+
+> — 浅拷贝（仅第一层）。
+
+```ts
+shallowClone({ a: 1, b: { c: 2 } });
+```
+
+### 数组
 
 ---
 
-## 更新日志
+#### unique(arr)
 
-### v1.0.9
+> — Set 去重。
 
-- **构建优化** — rolldown 开启 `minify: true`压缩 JS/CJS（注释/空白移除 + 变量名缩短）
-- **类型声明优化** — 移除 `.d.ts` 中冗余的 JSDoc 注释
+```ts
+unique([1, 2, 2, 3]); // [1, 2, 3]
+```
 
-### v1.0.7 & v1.0.8
+#### uniqueByKey(arr, key)
 
-- **体积优化** — 移除JSDoc `@example` 示例注释（共 294 行），减少包体积
-- **文档** — README 底部新增更新日志模块
+> — 对象数组按 key 去重。
 
-### v1.0.6
+```ts
+uniqueByKey([{ id: 1 }, { id: 1 }], "id");
+```
 
-- **数组模块** — 新增 `mergeArrays` 数组合并、`flatten` 数组扁平化（支持任意层级）、`arrFind` 数组项查询、`groupBy` JSON 数组分组、`filterEmptyValues` 对象移除空值属性、`createRange` 快速生成范围数组
-- **浏览器模块** — 新增 `observeIntersection` 可视区域检测（基于 IntersectionObserver）
+#### sortNumAsc(arr)
 
-### v1.0.5
+> — 数值升序。
 
-- **控制模块** — 新增 `debounce` 防抖与 `throttle` 节流
+```ts
+sortNumAsc([3, 1, 2]); // [1, 2, 3]
+```
 
-### v1.0.4
+#### sortNumDesc(arr)
 
-- 初始版本，包含以下模块：
-  - **类型判断** — `isArray` `isObject` `is` `isFunction` `isAsyncFunction` `isPromise` `isDate` `isNumber` `isInt` `isFloat` `isString` `isBoolean` `isSymbol` `isPrimitive` `isNull` `isDef` `isUnDef` `isNullOrUnDef` `isEmpty` `isEmptySv` `isEqual` `isHexColor` `isValidEmail` `isPC` `isWindow` `isElement` `isIOS` 共 27 个函数
-  - **格式化** — 日期时间（`formatFull` `formatFullReplace` `formatYMD` `formatWeek`）、数字货币（`formatRmb` `formatNum` `percentCN` `compactEN` `compactCN` `signed`）、字符串（`maskPhone` `spacePhone` `capitalize` `kebabToCamel` `camelToKebab` `toCamel` `firstUpper` `firstLower` `reverse` `trimAll` `truncate` `truncateByWords`）共 22 个函数
-  - **存储** — `localGet` `localSet` `localRm` `localClear` 共 4 个函数
-  - **拷贝** — `deepClone` `deepCloneWithJSON` `shallowClone` 共 3 个函数
-  - **数组** — `unique` `uniqueByKey` `sortNumAsc` `sortNumDesc` `sortByKey` `toArray` 共 6 个函数
-  - **Cookie** — `setCookie` `getCookie` `delCookie` 共 3 个函数
-  - **浏览器** — `getUrlParams` `getUrlParam` `toQueryString` `copyToClipboard` `downloadFile` `exportJSON` `scrollToTop` `scrollToBottom` `onScroll` 共 9 个函数
+> — 数值降序。
+
+```ts
+sortNumDesc([1, 3, 2]); // [3, 2, 1]
+```
+
+#### sortByKey(arr, key, order?)
+
+> — 按对象属性排序。
+
+```ts
+sortByKey([{ age: 30 }, { age: 20 }], "age");
+```
+
+#### toArray(arrayLike)
+
+> — 类数组转数组。
+
+```ts
+toArray(document.querySelectorAll("div"));
+```
+
+#### mergeArrays(...arrays)
+
+> — 合并多个数组。
+
+```ts
+mergeArrays([1, 2], [3, 4], [5]); // [1, 2, 3, 4, 5]
+```
+
+#### flatten(arr, depth?)
+
+> — 多维数组扁平化到指定层级（默认 1 层，传 `Infinity` 完全展开）。
+
+```ts
+flatten([1, [2, [3, 4]], 5]); // [1, 2, [3, 4], 5]
+flatten([1, [2, [3, 4]], 5], Infinity); // [1, 2, 3, 4, 5]
+```
+
+#### arrFind(arr, key, value)
+
+> — 对象数组中按 key-value 查找第一个匹配项。
+
+```ts
+arrFind([{ id: 1 }, { id: 2 }], "id", 2); // { id: 2 }
+```
+
+#### groupBy(arr, key)
+
+> — 对象数组按指定属性分组。
+
+```ts
+groupBy([{ type: "fruit" }, { type: "vegetable" }], "type");
+// => { fruit: [...], vegetable: [...] }
+```
+
+#### filterEmptyValues(obj)
+
+> — 移除对象中值为空（null / undefined / 空字符串）的属性。
+
+```ts
+filterEmptyValues({ a: 1, b: "", c: null }); // { a: 1 }
+```
+
+#### createRange(length, mapFn?)
+
+> — 快速生成范围数组。
+
+```ts
+createRange(5); // [0, 1, 2, 3, 4]
+createRange(3, (i) => i * 2); // [0, 2, 4]
+```
+
+### Cookie
+
+---
+
+#### setCookie(name, value, days?)
+
+> — 设置 Cookie（默认7天）。
+
+```ts
+setCookie("token", "abc123", 30);
+```
+
+#### getCookie(name)
+
+> — 获取 Cookie。
+
+```ts
+getCookie("token"); // "abc123"
+```
+
+#### delCookie(name)
+
+> — 删除 Cookie。
+
+```ts
+delCookie("token");
+```
+
+### 浏览器
+
+---
+
+#### getUrlParams(url?)
+
+> — 获取 URL 参数对象。
+
+```ts
+getUrlParams("?a=1&b=2"); // { a: '1', b: '2' }
+```
+
+#### getUrlParam(key, url?)
+
+> — 获取单个 URL 参数。
+
+```ts
+getUrlParam("a"); // "1"
+```
+
+#### toQueryString(params)
+
+> — 对象转 URL 参数字符串。
+
+```ts
+toQueryString({ a: 1, b: "hello" }); // "a=1&b=hello"
+```
+
+#### copyToClipboard(text)
+
+> — 复制文本到剪贴板（支持降级）。
+
+```ts
+await copyToClipboard("Hello");
+```
+
+#### downloadFile(content, filename, mimeType?)
+
+> — 下载文件（Blob）。
+
+```ts
+downloadFile("Hello", "hello.txt");
+```
+
+#### exportJSON(data, filename?)
+
+> — 导出 JSON 为文件。
+
+```ts
+exportJSON({ name: "张三" });
+```
+
+#### scrollToTop(behavior?)
+
+> — 滚动到顶部（默认平滑）。
+
+```ts
+scrollToTop();
+```
+
+#### scrollToBottom(behavior?)
+
+> — 滚动到底部（默认平滑）。
+
+```ts
+scrollToBottom();
+```
+
+#### onScroll(callback)
+
+> — 监听滚动（rAF 节流），返回清理函数。
+
+```ts
+const off = onScroll((y) => console.log(y));
+```
+
+#### observeIntersection(target, onEnter, onLeave?, options?)
+
+> — 监听元素进入/离开可视区域，返回清理函数。
+
+```ts
+const cleanup = observeIntersection(document.querySelector(".footer")!, () =>
+  loadMore(10),
+);
+```
+
+### 防抖与节流
+
+---
+
+#### debounce(fn, delay?, options?)
+
+> — 防抖，停止调用 delay 毫秒后才执行。
+
+```ts
+const fn = debounce((val: string) => console.log(val), 500);
+fn("a");
+fn("b");
+fn("c");
+// => 'c'
+```
+
+#### throttle(fn, interval?, options?)
+
+> — 节流，固定间隔内最多执行一次。
+
+```ts
+const fn = throttle((val: string) => console.log(val), 500);
+fn("a");
+fn("b");
+fn("c");
+// => 'a'，500ms 后输出 'c'
+```
