@@ -77,6 +77,17 @@ export function deepCloneWithJSON<T>(obj: T): T {
 }
 
 /**
+ * structuredClone 深拷贝
+ * 不支持函数、Symbol，传入会抛出 DataCloneError
+ * @param obj - 要拷贝的值
+ * @param options - 可选配置（如 transfer 转移数组）
+ * @returns 深拷贝后的值
+ */
+export function structClone<T>(obj: T, options?: StructuredSerializeOptions): T {
+  return structuredClone(obj, options);
+}
+
+/**
  * 浅拷贝
  * 仅拷贝第一层属性，嵌套对象仍共享引用
  * @param obj - 要拷贝的对象或数组
