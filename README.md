@@ -754,3 +754,165 @@ fn("b");
 fn("c");
 // => 'a'，500ms 后输出 'c'
 ```
+
+### 数学
+
+---
+
+#### clamp(value, min, max)
+
+> — 将值限制在 [min, max] 闭区间内。
+
+```ts
+clamp(5, 1, 10); // 5
+clamp(0, 1, 10); // 1
+clamp(20, 1, 10); // 10
+```
+
+#### randomInt(min, max)
+
+> — 生成 [min, max] 闭区间内的随机整数。
+
+```ts
+randomInt(1, 10); // 7（随机，范围 1~10 含两端）
+```
+
+#### randomFloat(min, max)
+
+> — 生成 [min, max) 区间内的随机浮点数。
+
+```ts
+randomFloat(0, 1); // 0.374...（随机，范围 [0, 1)）
+```
+
+#### round(value, decimals?)
+
+> — 四舍五入到指定小数位（默认 0 位）。
+
+```ts
+round(3.14159, 2); // 3.14
+round(3.6); // 4
+```
+
+#### sum(arr)
+
+> — 数组求和（空数组返回 0）。
+
+```ts
+sum([1, 2, 3]); // 6
+```
+
+#### average(arr)
+
+> — 数组平均值（空数组返回 NaN）。
+
+```ts
+average([1, 2, 3]); // 2
+```
+
+#### inRange(value, min, max)
+
+> — 判断数值是否在 [min, max] 闭区间内。
+
+```ts
+inRange(5, 1, 10); // true
+inRange(0, 1, 10); // false
+```
+
+#### lerp(start, end, t)
+
+> — 线性插值，按比例 t 取 start 到 end 之间的值。
+
+```ts
+lerp(0, 100, 0.5); // 50
+lerp(0, 100, 0); // 0
+lerp(0, 100, 1); // 100
+```
+
+### 字符串
+
+---
+
+#### randomString(length?)
+
+> — 生成指定长度的随机字母数字字符串（默认 8 位）。
+
+```ts
+randomString(6); // "aB3xY9"
+```
+
+#### uuid()
+
+> — 生成 UUID v4。
+
+```ts
+uuid(); // "550e8400-e29b-41d4-a716-446655440000"
+```
+
+#### escapeHtml(str)
+
+> — 转义 HTML 特殊字符（& < > " '）。
+
+```ts
+escapeHtml('<div class="a">&</div>');
+// => '&lt;div class=&quot;a&quot;&gt;&amp;&lt;/div&gt;'
+```
+
+#### unescapeHtml(str)
+
+> — 反转义 HTML 实体。
+
+```ts
+unescapeHtml('&lt;div&gt;hello&lt;/div&gt;');
+// => '<div>hello</div>'
+```
+
+#### stripHtml(str)
+
+> — 去除字符串中的 HTML 标签。
+
+```ts
+stripHtml('<p>hello</p>'); // "hello"
+```
+
+#### ensurePrefix(str, prefix)
+
+> — 确保字符串以指定前缀开头（若没有则添加）。
+
+```ts
+ensurePrefix('world', 'hello-'); // "hello-world"
+ensurePrefix('hello-world', 'hello-'); // "hello-world"
+```
+
+#### ensureSuffix(str, suffix)
+
+> — 确保字符串以指定后缀结尾（若没有则添加）。
+
+```ts
+ensureSuffix('hello', '.txt'); // "hello.txt"
+```
+
+#### removePrefix(str, prefix)
+
+> — 移除字符串的前缀（若存在）。
+
+```ts
+removePrefix('hello-world', 'hello-'); // "world"
+```
+
+#### removeSuffix(str, suffix)
+
+> — 移除字符串的后缀（若存在）。
+
+```ts
+removeSuffix('hello.txt', '.txt'); // "hello"
+```
+
+#### byteSize(str)
+
+> — 获取字符串的 UTF-8 字节长度（中文约 3 字节/字）。
+
+```ts
+byteSize('hello'); // 5
+byteSize('你好'); // 6
+```

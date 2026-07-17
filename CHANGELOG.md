@@ -11,6 +11,32 @@
 - 新增
   - `timestamp` — 获取当前时间戳（毫秒）
 
+### 数学模块
+
+- 新增
+  - `clamp` — 将值限制在 [min, max] 闭区间内
+  - `randomInt` — 生成 [min, max] 闭区间内的随机整数
+  - `randomFloat` — 生成 [min, max) 区间内的随机浮点数
+  - `round` — 四舍五入到指定小数位
+  - `sum` — 数组求和
+  - `average` — 数组平均值
+  - `inRange` — 判断数值是否在闭区间内
+  - `lerp` — 线性插值
+
+### 字符串模块
+
+- 新增
+  - `randomString` — 生成指定长度的随机字母数字字符串
+  - `uuid` — 生成 UUID v4
+  - `escapeHtml` — 转义 HTML 特殊字符
+  - `unescapeHtml` — 反转义 HTML 实体
+  - `stripHtml` — 去除字符串中的 HTML 标签
+  - `ensurePrefix` — 确保字符串以指定前缀开头
+  - `ensureSuffix` — 确保字符串以指定后缀结尾
+  - `removePrefix` — 移除字符串的前缀
+  - `removeSuffix` — 移除字符串的后缀
+  - `byteSize` — 获取字符串的 UTF-8 字节长度
+
 ## v1.0.10
 
 ### 拷贝模块
