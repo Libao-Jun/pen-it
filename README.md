@@ -238,6 +238,18 @@ isElement(document.body); // true
 isIOS(); // true
 ```
 
+### 时间戳
+
+---
+
+#### timestamp()
+
+> — 获取当前时间戳（毫秒），等价于 `Date.now()`。
+
+```ts
+timestamp(); // 1752772800000
+```
+
 ### 时间日期格式化
 
 ---

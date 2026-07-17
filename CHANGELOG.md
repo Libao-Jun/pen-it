@@ -6,6 +6,11 @@
 
 - 扁平化 `src/` 目录：移除每类工具函数的文件夹目录（`array/`、`browser/`、`control/`、`cookie/`、`copy/`、`format/`、`is/`、`storage/`），将各文件夹中的 `index.ts` 上移并重命名为对应的 `.ts` 文件
 
+### 时间戳模块
+
+- 新增
+  - `timestamp` — 获取当前时间戳（毫秒）
+
 ## v1.0.10
 
 ### 拷贝模块
