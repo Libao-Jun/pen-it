@@ -1,7 +1,7 @@
 {
   "name": "pen-it",
   "version": "2.0.0",
-  "description": "用笔锚定记忆中的前端常用工具函数，一个轻量级的前端实用程序库，支持类型检查、日期/数字格式化、字符串操作、数据存储、深度克隆、数组操作、Cookie 以及浏览器 API",
+  "description": "用笔锚定记忆中的常用 JavaScript / TypeScript 工具集，一个轻量级的前端实工具库",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
