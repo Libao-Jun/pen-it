@@ -1,6 +1,6 @@
 # pen-it
 
-用 “笔” 锚定记忆中常用的 JavaScript / TypeScript 工具集，一个轻量级的实用工具库，零依赖，支持 Tree-shaking，让常用函数信手拈来。
+用 “笔” 锚定记忆中常用的 JavaScript / TypeScript 工具集，一个轻量级的实用工具库，零依赖，支持 Tree-shaking。
 
 ## 安装
 
@@ -13,6 +13,22 @@ pnpm add pen-it
 ```ts
 import { isArray, formatFull, deepClone, unique } from "pen-it";
 ```
+
+## 运行环境
+
+| 语法/API                        | 最低版本要求                   |
+| ------------------------------- | ------------------------------ |
+| 箭头函数 / `const` / 模板字符串 | ES2015                         |
+| `??` / `?.` / 展开运算符        | ES2020                         |
+| `Array.prototype.flat`          | ES2019 / Chrome 69+ / Node 11+ |
+| `Object.fromEntries`            | ES2019 / Chrome 73+ / Node 12+ |
+| `structuredClone`               | Chrome 98+ / Node 17+          |
+| `TextEncoder`                   | Chrome 38+ / Node 11+          |
+| `Intl`（格式化函数）            | Chrome 24+ / Node 0.12+        |
+
+> **最低完整支持**：Chrome 98+ / Firefox 94+ / Safari 15.4+ / Node 18+
+
+ES5 环境（如 IE11）无法直接使用，需通过 Babel 等工具对 `node_modules/pen-it` 进行二次编译并补充 polyfill。
 
 ## API
 
@@ -137,7 +153,7 @@ isPrimitive(42); // true
 > — 检查是否为基础类型（string/number/boolean/symbol/bigint/null/undefined）。
 
 ```ts
-isBasicType('hello'); // true
+isBasicType("hello"); // true
 isBasicType({}); // false
 ```
 
@@ -265,7 +281,7 @@ timestamp(); // 1752772800000
 
 ```ts
 isToday(new Date()); // true
-isToday(new Date('2020-01-01')); // false
+isToday(new Date("2020-01-01")); // false
 ```
 
 #### firstDay(y, m)
@@ -898,7 +914,7 @@ escapeHtml('<div class="a">&</div>');
 > — 反转义 HTML 实体。
 
 ```ts
-unescapeHtml('&lt;div&gt;hello&lt;/div&gt;');
+unescapeHtml("&lt;div&gt;hello&lt;/div&gt;");
 // => '<div>hello</div>'
 ```
 
@@ -907,7 +923,7 @@ unescapeHtml('&lt;div&gt;hello&lt;/div&gt;');
 > — 去除字符串中的 HTML 标签。
 
 ```ts
-stripHtml('<p>hello</p>'); // "hello"
+stripHtml("<p>hello</p>"); // "hello"
 ```
 
 #### ensurePrefix(str, prefix)
@@ -915,8 +931,8 @@ stripHtml('<p>hello</p>'); // "hello"
 > — 确保字符串以指定前缀开头（若没有则添加）。
 
 ```ts
-ensurePrefix('world', 'hello-'); // "hello-world"
-ensurePrefix('hello-world', 'hello-'); // "hello-world"
+ensurePrefix("world", "hello-"); // "hello-world"
+ensurePrefix("hello-world", "hello-"); // "hello-world"
 ```
 
 #### ensureSuffix(str, suffix)
@@ -924,7 +940,7 @@ ensurePrefix('hello-world', 'hello-'); // "hello-world"
 > — 确保字符串以指定后缀结尾（若没有则添加）。
 
 ```ts
-ensureSuffix('hello', '.txt'); // "hello.txt"
+ensureSuffix("hello", ".txt"); // "hello.txt"
 ```
 
 #### removePrefix(str, prefix)
@@ -932,7 +948,7 @@ ensureSuffix('hello', '.txt'); // "hello.txt"
 > — 移除字符串的前缀（若存在）。
 
 ```ts
-removePrefix('hello-world', 'hello-'); // "world"
+removePrefix("hello-world", "hello-"); // "world"
 ```
 
 #### removeSuffix(str, suffix)
@@ -940,7 +956,7 @@ removePrefix('hello-world', 'hello-'); // "world"
 > — 移除字符串的后缀（若存在）。
 
 ```ts
-removeSuffix('hello.txt', '.txt'); // "hello"
+removeSuffix("hello.txt", ".txt"); // "hello"
 ```
 
 #### byteSize(str)
@@ -948,18 +964,18 @@ removeSuffix('hello.txt', '.txt'); // "hello"
 > — 获取字符串的 UTF-8 字节长度（中文约 3 字节/字）。
 
 ```ts
-byteSize('hello'); // 5
-byteSize('你好'); // 6
+byteSize("hello"); // 5
+byteSize("你好"); // 6
 ```
 
 #### maskName(name)
 
-> — 姓名脱敏（保留首字，其余替换为 *）。
+> — 姓名脱敏（保留首字，其余替换为 \*）。
 
 ```ts
-maskName('张三'); // "张*"
-maskName('张三丰'); // "张**"
-maskName('欧阳娜娜'); // "欧***"
+maskName("张三"); // "张*"
+maskName("张三丰"); // "张**"
+maskName("欧阳娜娜"); // "欧***"
 ```
 
 ### 格式校验 — `validation`
@@ -971,8 +987,8 @@ maskName('欧阳娜娜'); // "欧***"
 > — 校验身份证号码（支持 15/18 位）。
 
 ```ts
-checkCardNo('110101199003074519'); // true
-checkCardNo('1234567890abcdef'); // false
+checkCardNo("110101199003074519"); // true
+checkCardNo("1234567890abcdef"); // false
 ```
 
 #### isEmail(value)
@@ -980,8 +996,8 @@ checkCardNo('1234567890abcdef'); // false
 > — 校验是否为邮箱地址。
 
 ```ts
-isEmail('test@example.com'); // true
-isEmail('invalid'); // false
+isEmail("test@example.com"); // true
+isEmail("invalid"); // false
 ```
 
 #### isTel(value)
@@ -989,6 +1005,6 @@ isEmail('invalid'); // false
 > — 校验是否为国内手机号。
 
 ```ts
-isTel('13812345678'); // true
-isTel('12012345678'); // false
+isTel("13812345678"); // true
+isTel("12012345678"); // false
 ```
