@@ -1,6 +1,6 @@
 # pen-it
 
-用 “笔” 锚定记忆中常用的 JavaScript / TypeScript 工具集，一个轻量级的前端实工具库，零依赖，支持 Tree-shaking，让常用函数信手拈来。
+用 “笔” 锚定记忆中常用的 JavaScript / TypeScript 工具集，一个轻量级的实用工具库，零依赖，支持 Tree-shaking，让常用函数信手拈来。
 
 ## 安装
 

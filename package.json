@@ -1,7 +1,7 @@
 {
   "name": "pen-it",
-  "version": "2.0.0",
-  "description": "用笔锚定记忆中的常用 JavaScript / TypeScript 工具集，一个轻量级的前端实工具库",
+  "version": "2.0.1",
+  "description": "用笔锚定记忆中的常用 JavaScript / TypeScript 工具集，一个轻量级的实工具库",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
