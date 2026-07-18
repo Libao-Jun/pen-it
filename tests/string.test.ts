@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { randomString, uuid, escapeHtml, unescapeHtml, stripHtml, ensurePrefix, ensureSuffix, removePrefix, removeSuffix, byteSize } from '../src/string'
+import { randomString, uuid, escapeHtml, unescapeHtml, stripHtml, ensurePrefix, ensureSuffix, removePrefix, removeSuffix, byteSize, maskName } from '../src/string'
 
 // ============================================================
 // randomString
@@ -293,5 +293,50 @@ describe('byteSize', () => {
   it('数字和符号各占 1 字节', () => {
     expect(byteSize('123')).toBe(3)
     expect(byteSize('!@#')).toBe(3)
+  })
+})
+
+// ============================================================
+// maskName
+// ============================================================
+describe('maskName', () => {
+  it('两字姓名脱敏', () => {
+    expect(maskName('张三')).toBe('张*')
+  })
+
+  it('三字姓名脱敏', () => {
+    expect(maskName('张三丰')).toBe('张**')
+  })
+
+  it('四字姓名脱敏', () => {
+    expect(maskName('欧阳娜娜')).toBe('欧***')
+  })
+
+  it('单字姓名原样返回', () => {
+    expect(maskName('张')).toBe('张')
+  })
+
+  it('空字符串返回空字符串', () => {
+    expect(maskName('')).toBe('')
+  })
+
+  it('纯空格返回空字符串', () => {
+    expect(maskName('   ')).toBe('')
+  })
+
+  it('null 返回空字符串', () => {
+    expect(maskName(null)).toBe('')
+  })
+
+  it('undefined 返回空字符串', () => {
+    expect(maskName(undefined)).toBe('')
+  })
+
+  it('英文名脱敏', () => {
+    expect(maskName('John')).toBe('J***')
+  })
+
+  it('数字类型转为字符串后脱敏', () => {
+    expect(maskName(123)).toBe('1**')
   })
 })

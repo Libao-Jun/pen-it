@@ -132,6 +132,15 @@ isSymbol(Symbol("foo")); // true
 isPrimitive(42); // true
 ```
 
+#### isBasicType(val)
+
+> — 检查是否为基础类型（string/number/boolean/symbol/bigint/null/undefined）。
+
+```ts
+isBasicType('hello'); // true
+isBasicType({}); // false
+```
+
 #### isNull(val)
 
 > — 判断是否为 null。
@@ -248,6 +257,32 @@ isIOS(); // true
 
 ```ts
 timestamp(); // 1752772800000
+```
+
+#### isToday(date)
+
+> — 判断日期是否为今天。
+
+```ts
+isToday(new Date()); // true
+isToday(new Date('2020-01-01')); // false
+```
+
+#### firstDay(y, m)
+
+> — 获取指定年月的第一天。
+
+```ts
+firstDay(2026, 7); // new Date(2026, 6, 1)
+```
+
+#### lastDay(y, m)
+
+> — 获取指定年月的最后一天。
+
+```ts
+lastDay(2026, 7); // new Date(2026, 6, 31)
+lastDay(2024, 2); // new Date(2024, 1, 29)（闰年）
 ```
 
 ### 时间日期格式化
@@ -915,4 +950,45 @@ removeSuffix('hello.txt', '.txt'); // "hello"
 ```ts
 byteSize('hello'); // 5
 byteSize('你好'); // 6
+```
+
+#### maskName(name)
+
+> — 姓名脱敏（保留首字，其余替换为 *）。
+
+```ts
+maskName('张三'); // "张*"
+maskName('张三丰'); // "张**"
+maskName('欧阳娜娜'); // "欧***"
+```
+
+### 格式校验 — `validation`
+
+---
+
+#### checkCardNo(value)
+
+> — 校验身份证号码（支持 15/18 位）。
+
+```ts
+checkCardNo('110101199003074519'); // true
+checkCardNo('1234567890abcdef'); // false
+```
+
+#### isEmail(value)
+
+> — 校验是否为邮箱地址。
+
+```ts
+isEmail('test@example.com'); // true
+isEmail('invalid'); // false
+```
+
+#### isTel(value)
+
+> — 校验是否为国内手机号。
+
+```ts
+isTel('13812345678'); // true
+isTel('12012345678'); // false
 ```

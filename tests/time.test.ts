@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { timestamp } from '../src/time'
+import { timestamp, isToday, firstDay, lastDay } from '../src/time'
 
 describe('timestamp', () => {
   it('应该返回一个数字', () => {
@@ -45,5 +45,99 @@ describe('timestamp', () => {
 
   it('不是 Infinity', () => {
     expect(Number.isFinite(timestamp())).toBe(true)
+  })
+})
+
+// ============================================================
+// isToday
+// ============================================================
+describe('isToday', () => {
+  it('今天日期返回 true', () => {
+    expect(isToday(new Date())).toBe(true)
+  })
+
+  it('今天的时间戳返回 true', () => {
+    expect(isToday(Date.now())).toBe(true)
+  })
+
+  it('今天的日期字符串返回 true', () => {
+    expect(isToday(new Date().toISOString())).toBe(true)
+  })
+
+  it('昨天日期返回 false', () => {
+    const yesterday = new Date(Date.now() - 86400000)
+    expect(isToday(yesterday)).toBe(false)
+  })
+
+  it('明天日期返回 false', () => {
+    const tomorrow = new Date(Date.now() + 86400000)
+    expect(isToday(tomorrow)).toBe(false)
+  })
+
+  it('不同年份返回 false', () => {
+    expect(isToday(new Date('2020-01-01'))).toBe(false)
+  })
+})
+
+// ============================================================
+// firstDay
+// ============================================================
+describe('firstDay', () => {
+  it('返回指定年月的第一天', () => {
+    const result = firstDay(2026, 7)
+    expect(result.getFullYear()).toBe(2026)
+    expect(result.getMonth()).toBe(6) // 0-indexed
+    expect(result.getDate()).toBe(1)
+  })
+
+  it('1 月的第一天', () => {
+    const result = firstDay(2026, 1)
+    expect(result.getMonth()).toBe(0)
+    expect(result.getDate()).toBe(1)
+  })
+
+  it('12 月的第一天', () => {
+    const result = firstDay(2026, 12)
+    expect(result.getMonth()).toBe(11)
+    expect(result.getDate()).toBe(1)
+  })
+
+  it('闰年 2 月第一天', () => {
+    const result = firstDay(2024, 2)
+    expect(result.getFullYear()).toBe(2024)
+    expect(result.getMonth()).toBe(1)
+    expect(result.getDate()).toBe(1)
+  })
+})
+
+// ============================================================
+// lastDay
+// ============================================================
+describe('lastDay', () => {
+  it('返回指定年月的最后一天', () => {
+    const result = lastDay(2026, 7)
+    expect(result.getFullYear()).toBe(2026)
+    expect(result.getMonth()).toBe(6) // 0-indexed
+    expect(result.getDate()).toBe(31)
+  })
+
+  it('1 月有 31 天', () => {
+    expect(lastDay(2026, 1).getDate()).toBe(31)
+  })
+
+  it('平年 2 月有 28 天', () => {
+    expect(lastDay(2025, 2).getDate()).toBe(28)
+  })
+
+  it('闰年 2 月有 29 天', () => {
+    expect(lastDay(2024, 2).getDate()).toBe(29)
+  })
+
+  it('4 月有 30 天', () => {
+    expect(lastDay(2026, 4).getDate()).toBe(30)
+  })
+
+  it('12 月有 31 天', () => {
+    expect(lastDay(2026, 12).getDate()).toBe(31)
   })
 })

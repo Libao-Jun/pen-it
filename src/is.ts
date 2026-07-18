@@ -223,6 +223,15 @@ export const isPrimitive = (value: any): boolean => {
 };
 
 /**
+ * 检查一个值是否为基础类型
+ * @param val - 要判断的数据
+ * @returns 如果是基础类型返回 true
+ */
+export const isBasicType = (val: any): val is string | number | boolean | symbol | bigint | null | undefined => {
+  return !val || Object(val) !== val
+};
+
+/**
  * 判断一个值是否为空
  * 空值包括：null、undefined、空字符串、空数组、空对象、空 Map/Set、无效 Date
  * @param value - 要判断的数据

@@ -24,6 +24,7 @@ import {
   isNullOrUnDef,
   isSymbol,
   isPrimitive,
+  isBasicType,
   isEmpty,
   isEmptySv,
   isEqual,
@@ -703,5 +704,79 @@ describe('isEqual', () => {
 
   it('should handle empty objects vs arrays', () => {
     expect(isEqual([], {})).toBe(false)
+  })
+})
+
+// ============================================================
+// isBasicType
+// ============================================================
+describe('isBasicType', () => {
+  it('null 是基础类型', () => {
+    expect(isBasicType(null)).toBe(true)
+  })
+
+  it('undefined 是基础类型', () => {
+    expect(isBasicType(undefined)).toBe(true)
+  })
+
+  it('字符串是基础类型', () => {
+    expect(isBasicType('hello')).toBe(true)
+  })
+
+  it('数字是基础类型', () => {
+    expect(isBasicType(42)).toBe(true)
+    expect(isBasicType(0)).toBe(true)
+    expect(isBasicType(NaN)).toBe(true)
+  })
+
+  it('布尔值是基础类型', () => {
+    expect(isBasicType(true)).toBe(true)
+    expect(isBasicType(false)).toBe(true)
+  })
+
+  it('symbol 是基础类型', () => {
+    expect(isBasicType(Symbol('foo'))).toBe(true)
+  })
+
+  it('bigint 是基础类型', () => {
+    expect(isBasicType(BigInt(42))).toBe(true)
+  })
+
+  it('对象不是基础类型', () => {
+    expect(isBasicType({})).toBe(false)
+    expect(isBasicType({ a: 1 })).toBe(false)
+  })
+
+  it('数组不是基础类型', () => {
+    expect(isBasicType([])).toBe(false)
+    expect(isBasicType([1, 2, 3])).toBe(false)
+  })
+
+  it('函数不是基础类型', () => {
+    expect(isBasicType(() => {})).toBe(false)
+    expect(isBasicType(function () {})).toBe(false)
+  })
+
+  it('Date 不是基础类型', () => {
+    expect(isBasicType(new Date())).toBe(false)
+  })
+
+  it('正则不是基础类型', () => {
+    expect(isBasicType(/abc/)).toBe(false)
+  })
+
+  it('Map / Set 不是基础类型', () => {
+    expect(isBasicType(new Map())).toBe(false)
+    expect(isBasicType(new Set())).toBe(false)
+  })
+
+  it('Promise 不是基础类型', () => {
+    expect(isBasicType(Promise.resolve())).toBe(false)
+  })
+
+  it('new String / new Number 包装对象不是基础类型', () => {
+    expect(isBasicType(new String('hello'))).toBe(false)
+    expect(isBasicType(new Number(42))).toBe(false)
+    expect(isBasicType(new Boolean(true))).toBe(false)
   })
 })

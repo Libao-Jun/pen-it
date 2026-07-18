@@ -116,3 +116,16 @@ export const removeSuffix = (str: string, suffix: string): string => {
 export const byteSize = (str: string): number => {
   return new TextEncoder().encode(str).length
 }
+
+/**
+ * 姓名脱敏
+ * @param name - 姓名
+ * @returns 脱敏后的姓名
+ */
+export const maskName = (name: unknown): string => {
+  const str = String(name ?? '')
+  if (!str.trim()) return ''
+  const chars = [...str]
+  if (chars.length === 1) return str
+  return chars[0] + '*'.repeat(chars.length - 1)
+}
